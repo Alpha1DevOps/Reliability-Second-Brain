@@ -71,24 +71,54 @@
 
 /* SVG styles */
 .graph-node { cursor: pointer; }
-.graph-node circle { transition: all var(--transition-fast); }
-.graph-node:hover circle { filter: brightness(0.95); }
-.graph-node.selected circle { stroke: var(--text-primary); stroke-width: 2; filter: drop-shadow(0 0 4px rgba(99,102,241,0.3)); }
-.graph-node text { fill: var(--text-secondary); font-size: 10px; font-family: var(--font-sans); pointer-events: none; font-weight: 500; }
+.graph-node circle { 
+  transition: all var(--transition-fast);
+  fill-opacity: 0.2; /* Translucent glass effect */
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); /* Light and shadow */
+}
+.graph-node.focused-anchor circle { stroke-width: 2.5; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)); fill-opacity: 0.3; }
+
+.graph-node text.node-label { 
+  fill: var(--text-primary); 
+  font-size: 11px; 
+  font-family: var(--font-sans); 
+  pointer-events: none; 
+  font-weight: 500; 
+  transition: all 0.2s ease;
+  text-shadow: 0px 2px 4px rgba(0,0,0,0.8); /* Readability */
+}
+.graph-node:hover text.node-label {
+  font-size: 15px; /* Scale only the text on hover */
+  font-weight: 700;
+  fill: #ffffff;
+}
+
+.graph-node text.node-penalty {
+  fill: #ffffff;
+  font-weight: 800;
+  pointer-events: none;
+  font-family: var(--font-sans);
+  text-shadow: 0px 2px 5px rgba(0,0,0,0.6); /* Clean shadow instead of stroke */
+}
+
 .graph-node.unfocused { opacity: 0.1; filter: grayscale(100%); }
 .graph-node.unfocused:hover { opacity: 0.5; filter: none; }
-.graph-node.focused-anchor circle { stroke-width: 2.5; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4)); }
-.graph-node.focused-anchor text { fill: var(--text-primary); font-weight: 600; font-size: 11px; }
+.graph-node.focused-anchor text.node-label { fill: var(--text-primary); font-weight: 600; font-size: 12px; }
 .graph-node.selected { opacity: 1 !important; filter: none !important; z-index: 10; }
-.graph-node.selected text { fill: var(--text-primary); font-weight: 600; }
+.graph-node.selected text.node-label { fill: var(--text-primary); font-weight: 700; }
+.graph-node.selected circle { stroke: #ffffff; stroke-width: 2.5; filter: drop-shadow(0 0 8px rgba(255,255,255,0.4)); fill-opacity: 0.35; }
 .graph-node.dimmed { opacity: 0.12 !important; filter: grayscale(100%) !important; }
 .graph-node.highlighted { opacity: 1 !important; filter: none !important; z-index: 5; }
-.graph-node.highlighted circle { filter: drop-shadow(0 0 3px rgba(99,102,241,0.2)); }
+.graph-node.highlighted circle { filter: drop-shadow(0 0 5px rgba(255,255,255,0.2)); fill-opacity: 0.25; }
 
 .graph-link { stroke: var(--border-default); stroke-width: 1; fill: none; }
 .graph-link.unfocused { opacity: 0.02; }
 .graph-link.dimmed { opacity: 0.02 !important; }
 .graph-link.highlighted { stroke: var(--text-muted); stroke-width: 2; opacity: 1 !important; z-index: 5; }
+
+/* Cross-Area Learning */
+.graph-link.cross-area-link { stroke: #f59e0b; opacity: 0.7; stroke-width: 1.5; stroke-dasharray: 4,4; }
+.graph-link.cross-area-link.highlighted { stroke: #fbbf24; stroke-width: 2.5; opacity: 1 !important; z-index: 6; stroke-dasharray: none; }
 
 /* Detail panel */
 .graph-detail-panel {
@@ -104,3 +134,33 @@
 .graph-detail-body { flex: 1; overflow-y: auto; padding: var(--sp-5); }
 .graph-detail-body::-webkit-scrollbar { width: 4px; }
 .graph-detail-body::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 2px; }
+
+/* ─── Level of Detail (LOD) Optimization for Zooming ─── */
+
+/* zoom-out-far: High performance mode for extreme zoom out */
+.graph-svg.zoom-out-far .node-label,
+.graph-svg.zoom-out-far .node-penalty {
+  display: none !important; /* Fully remove from render tree */
+}
+.graph-svg.zoom-out-far .graph-node circle {
+  filter: none !important; /* Disable expensive drop-shadows */
+  stroke-width: 0 !important;
+}
+.graph-svg.zoom-out-far .graph-link {
+  filter: none !important;
+}
+.graph-svg.zoom-out-far .locations-group {
+  display: none !important; /* Hide cluster backgrounds */
+}
+
+/* zoom-out-mid: Medium performance mode */
+.graph-svg.zoom-out-mid .node-label {
+  opacity: 0; /* Fade out gracefully */
+}
+.graph-svg.zoom-out-mid .node-penalty {
+  font-size: 8px !important;
+  opacity: 0.8;
+}
+.graph-svg.zoom-out-mid .graph-node.unfocused circle {
+  filter: none !important;
+}

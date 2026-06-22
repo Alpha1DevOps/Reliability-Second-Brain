@@ -1,7 +1,7 @@
 {
   "name": "ecbp",
   "version": "1.0.0",
-  "description": "Digital Organizational Topology - Knowledge Graph System",
+  "description": "Second Brain - Unlock wisdom through connecting the dot.",
   "type": "module",
   "scripts": {
     "dev": "concurrently \"node server/index.js\" \"vite\"",

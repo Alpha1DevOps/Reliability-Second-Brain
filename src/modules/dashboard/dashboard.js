@@ -22,8 +22,8 @@ function buildDashboardHTML(kpis, stats) {
   return `
     <div class="page-header animate-slideUp">
       <div>
-        <h1>DOT: Digital Organizational Topology</h1>
-        <p class="text-sm text-secondary" style="margin-top:2px;">Connecting every data point to empower the big picture.</p>
+        <h1>Second Brain</h1>
+        <p class="text-sm text-secondary" style="margin-top:2px;">Unlock wisdom through connecting the dot.</p>
       </div>
       <div class="page-header-actions">
         <button class="btn btn-primary" onclick="location.hash='#/graph'">

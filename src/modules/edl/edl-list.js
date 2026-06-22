@@ -18,7 +18,7 @@ export async function renderEDL() {
           <select class="select" id="filter-cat" style="width:auto;min-width:150px;"><option value="">All Categories</option>${EDL_CATEGORIES.map(c => `<option>${c}</option>`).join('')}</select>
         </div>
         <div class="card" style="padding:0;overflow:hidden;">
-          <table class="data-table"><thead><tr><th>Document</th><th>Type</th><th>Number</th><th>Version</th><th>Category</th><th>Link</th></tr></thead>
+          <table class="data-table"><thead><tr><th>Document</th><th>Type</th><th>Number</th><th>Version</th><th>Category</th><th>Equipment</th><th>Link</th></tr></thead>
           <tbody id="edl-tbody">${docs.map(d => `
             <tr class="edl-row" data-id="${d.id}">
               <td style="max-width:280px;" class="truncate">${d.properties.title}</td>
@@ -26,12 +26,25 @@ export async function renderEDL() {
               <td style="font-family:var(--font-mono);font-size:12px;">${d.properties.doc_number || '-'}</td>
               <td>${d.properties.version || '-'}</td>
               <td><span class="badge badge-edl">${d.properties.category || '-'}</span></td>
+              <td style="font-size:12px;">
+                ${d.properties.equipment ? `<a href="#" class="equipment-link" data-eqid="${d.properties.equipment_id}" style="color:var(--brand-600);text-decoration:none;font-weight:500;">${d.properties.equipment}</a>` : '-'}
+              </td>
               <td>${d.properties.external_url ? `<a href="${d.properties.external_url}" target="_blank" style="display:flex;align-items:center;gap:3px;font-size:12px;">${icon('externalLink', 12)} Open</a>` : '-'}</td>
             </tr>`).join('')}</tbody></table>
           ${docs.length === 0 ? '<div class="empty-state" style="padding:40px;"><p>No documents registered</p></div>' : ''}
         </div>
       </div>`;
-    container.querySelectorAll('.edl-row').forEach(row => { row.addEventListener('click', (e) => { if (!e.target.closest('a')) navigate('node-detail', { id: row.dataset.id }); }); });
+    container.querySelectorAll('.edl-row').forEach(row => {
+      row.addEventListener('click', (e) => {
+        if (e.target.closest('.equipment-link')) {
+          e.preventDefault();
+          e.stopPropagation();
+          navigate('node-detail', { id: e.target.closest('.equipment-link').dataset.eqid });
+        } else if (!e.target.closest('a')) {
+          navigate('node-detail', { id: row.dataset.id });
+        }
+      });
+    });
     container.querySelector('#btn-create')?.addEventListener('click', async () => {
       const html = `<div style="display:flex;flex-direction:column;gap:12px;">
         <div class="form-group"><label class="form-label">Title *</label><input class="input" id="f-title"/></div>

@@ -37,13 +37,25 @@ function renderRows(incidents) {
       <td><span class="badge badge-severity-${inc.properties.severity?.toLowerCase()}">${inc.properties.severity || '-'}</span></td>
       <td><span class="badge-status badge-status-${inc.properties.status?.toLowerCase()}">${inc.properties.status || '-'}</span></td>
       <td style="white-space:nowrap;font-size:12px;">${inc.properties.date || '-'}</td>
-      <td style="font-size:12px;">${inc.properties.equipment || '-'}</td>
+      <td style="font-size:12px;">
+        ${inc.properties.equipment ? `<a href="#" class="equipment-link" data-eqid="${inc.properties.equipment_id}" style="color:var(--brand-600);text-decoration:none;font-weight:500;">${inc.properties.equipment}</a>` : '-'}
+      </td>
       <td style="text-align:center;color:var(--text-muted);">${icon('arrowRight', 14)}</td>
     </tr>`).join('');
 }
 
 function bindEvents(container) {
-  container.querySelectorAll('.incident-row').forEach(row => { row.addEventListener('click', () => navigate('node-detail', { id: row.dataset.id })); });
+  container.querySelectorAll('.incident-row').forEach(row => {
+    row.addEventListener('click', (e) => {
+      // Don't navigate to incident if they clicked the equipment link
+      if (e.target.closest('.equipment-link')) {
+        e.stopPropagation();
+        navigate('node-detail', { id: e.target.closest('.equipment-link').dataset.eqid });
+      } else {
+        navigate('node-detail', { id: row.dataset.id });
+      }
+    });
+  });
   const filterFn = async () => {
     const sev = container.querySelector('#filter-severity').value;
     const stat = container.querySelector('#filter-status').value;

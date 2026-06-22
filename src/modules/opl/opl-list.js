@@ -19,6 +19,7 @@ export async function renderOPL() {
             <div class="card interactive" data-id="${opl.id}" style="border-left:3px solid #059669;">
               <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap;">
                 <span class="badge badge-opl" style="display:flex;align-items:center;gap:3px;">${NODE_TYPES.opl.icon} OPL</span>
+                ${opl.properties.equipment ? `<a href="#" class="equipment-link tag" data-eqid="${opl.properties.equipment_id}" style="background:var(--brand-50);color:var(--brand-600);text-decoration:none;display:flex;align-items:center;gap:4px;">${icon('tool', 10)} ${opl.properties.equipment}</a>` : ''}
                 ${opl.properties.category ? `<span class="tag">${opl.properties.category}</span>` : ''}
                 ${opl.properties.target_audience ? `<span class="tag" style="background:#ecfeff;color:#0891b2;">${opl.properties.target_audience}</span>` : ''}
               </div>
@@ -33,7 +34,17 @@ export async function renderOPL() {
           ${opls.length === 0 ? '<div class="empty-state" style="grid-column:1/-1;"><p>No OPLs created yet</p></div>' : ''}
         </div>
       </div>`;
-    container.querySelectorAll('.card.interactive').forEach(card => { card.addEventListener('click', () => navigate('node-detail', { id: card.dataset.id })); });
+    container.querySelectorAll('.card.interactive').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.equipment-link')) {
+          e.preventDefault();
+          e.stopPropagation();
+          navigate('node-detail', { id: e.target.closest('.equipment-link').dataset.eqid });
+        } else {
+          navigate('node-detail', { id: card.dataset.id });
+        }
+      });
+    });
     container.querySelector('#btn-create')?.addEventListener('click', async () => {
       const html = `<div style="display:flex;flex-direction:column;gap:12px;">
         <div class="form-group"><label class="form-label">Title *</label><input class="input" id="f-title"/></div>

@@ -17,6 +17,7 @@ export const state = new Proxy({
   sidebarCollapsed: false,
   graphFilters: {
     nodeTypes: ['incident', 'lesson', 'edl', 'opl', 'equipment', 'system', 'failure_mode', 'person', 'skill', 'training'],
+    locations: ['APU-A', 'APU-B', 'APU-C', 'APU-D', 'APU-E', 'APU-F'],
     search: '',
     clusterFocus: ''
   }

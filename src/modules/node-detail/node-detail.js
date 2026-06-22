@@ -100,7 +100,7 @@ async function showEditModal(data) {
   if (result === 'save') {
     const modal = document.querySelector('.modal-content'); const updates = {};
     modal.querySelectorAll('[data-field]').forEach(el => { updates[el.dataset.field] = el.value; });
-    try { await api.updateNode(data.id, updates); showToast('Node updated', 'success'); renderNodeDetail({ id: data.id }); }
+    try { await api.updateNode(data.id, updates); showToast('✅ บันทึกข้อมูลเรียบร้อยแล้ว (Save Completed)', 'success'); renderNodeDetail({ id: data.id }); }
     catch (err) { showToast('Error: ' + err.message, 'error'); }
   }
 }

@@ -28,7 +28,11 @@ export function showModal(title, contentHtml, actions = []) {
         <div class="modal-body">${contentHtml}</div>
         ${actions.length > 0 ? `<div class="modal-actions">${actions.map(a => `<button class="btn ${a.class || 'btn-secondary'}" data-action="${a.action}">${a.label}</button>`).join('')}</div>` : ''}
       </div>`;
-    const close = (result) => { overlay.remove(); resolve(result); };
+    const close = (result) => { 
+      resolve(result); 
+      // Remove overlay on next tick so callers can read form data
+      setTimeout(() => overlay.remove(), 0); 
+    };
     overlay.querySelector('.modal-close').addEventListener('click', () => close(null));
     overlay.addEventListener('click', (e) => { if (e.target === overlay) close(null); });
     overlay.querySelectorAll('[data-action]').forEach(btn => { if (btn.dataset.action !== 'close') btn.addEventListener('click', () => close(btn.dataset.action)); });

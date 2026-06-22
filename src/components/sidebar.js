@@ -14,6 +14,9 @@ const menuItems = [
   { type: 'divider' },
   { id: 'equipment', label: 'Equipment', icon: icons.equipment },
   { id: 'skills', label: 'Skills & Learning', icon: icons.skills },
+  { type: 'divider' },
+  { id: 'data-sync', label: 'Data Management', icon: icons.database },
+  { id: 'ai-extractor', label: 'AI Extractor', icon: icons.sparkles },
 ];
 
 export function renderSidebar() {
@@ -23,8 +26,8 @@ export function renderSidebar() {
     <div style="padding: 16px 20px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border-light);">
       <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--brand-600); display: flex; align-items: center; justify-content: center; color: white; flex-shrink: 0;">${icon('brain', 18)}</div>
       <div style="flex:1;min-width:0">
-        <div style="font-size: 13px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em;">DOT</div>
-        <div style="font-size: 10px; color: var(--text-muted); font-weight: 400;">Digital Organizational Topology</div>
+        <div style="font-size: 13px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em;">Second Brain</div>
+        <div style="font-size: 10px; color: var(--text-muted); font-weight: 400;">Unlock wisdom through connecting the dot.</div>
       </div>
     </div>
 

@@ -12,7 +12,8 @@ export function renderHeader() {
   const routeLabels = {
     dashboard: 'Dashboard', graph: 'Knowledge Graph', incidents: 'Incidents',
     lessons: 'Lessons Learned', edl: 'Engineering Documents', opl: 'OPL',
-    equipment: 'Equipment', skills: 'Skills & Learning', 'node-detail': 'Node Detail'
+    equipment: 'Equipment', skills: 'Skills & Learning', 'node-detail': 'Node Detail',
+    'data-sync': 'Data Management', 'ai-extractor': 'AI Knowledge Extractor'
   };
 
   el.innerHTML = `
