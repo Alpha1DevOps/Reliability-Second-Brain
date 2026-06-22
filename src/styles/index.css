@@ -6,38 +6,38 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* ─── Brand (Monochromatic Blue-Slate) ─── */
-  --brand-50: #f0f4ff;
-  --brand-100: #e0e7ff;
-  --brand-200: #c7d2fe;
-  --brand-300: #a5b4fc;
-  --brand-400: #818cf8;
-  --brand-500: #6366f1;
-  --brand-600: #4f46e5;
-  --brand-700: #4338ca;
-  --brand-800: #3730a3;
-  --brand-900: #312e81;
+  /* ─── Brand (Obsidian Amethyst) ─── */
+  --brand-50: #faf5ff;
+  --brand-100: #f3e8ff;
+  --brand-200: #e9d5ff;
+  --brand-300: #d8b4fe;
+  --brand-400: #c084fc;
+  --brand-500: #a855f7;
+  --brand-600: #9333ea;
+  --brand-700: #7e22ce;
+  --brand-800: #6b21a8;
+  --brand-900: #581c87;
 
-  /* ─── Surfaces ─── */
-  --bg-body: #f5f5f7; /* iOS off-white */
-  --bg-white: rgba(255, 255, 255, 0.75); /* Frosted glass white */
-  --bg-solid-white: #ffffff; /* Fallback solid white */
-  --bg-subtle: rgba(241, 243, 249, 0.6);
-  --bg-muted: rgba(232, 236, 244, 0.6);
-  --bg-hover: rgba(0, 0, 0, 0.04);
-  --bg-active: rgba(99, 102, 241, 0.1);
+  /* ─── Surfaces (Dark Obsidian) ─── */
+  --bg-body: #1e1e1e; /* Obsidian workspace */
+  --bg-white: #252525; /* Panels and sidebars */
+  --bg-solid-white: #2d2d2d; /* Elevated cards */
+  --bg-subtle: #333333;
+  --bg-muted: #3a3a3a;
+  --bg-hover: rgba(255, 255, 255, 0.08);
+  --bg-active: rgba(168, 85, 247, 0.15);
 
-  /* ─── Text ─── */
-  --text-primary: #1d1d1f; /* iOS dark text */
-  --text-secondary: #86868b;
-  --text-muted: #a1a1a6;
-  --text-accent: var(--brand-600);
+  /* ─── Text (Dark Mode) ─── */
+  --text-primary: #dcddde;
+  --text-secondary: #a0a0a5;
+  --text-muted: #737373;
+  --text-accent: var(--brand-400); /* Lighter purple for dark mode text */
 
-  /* ─── Borders ─── */
-  --border-light: rgba(0, 0, 0, 0.05); /* Extremely subtle border */
-  --border-default: rgba(0, 0, 0, 0.1);
-  --border-hover: rgba(0, 0, 0, 0.2);
-  --border-focus: var(--brand-400);
+  /* ─── Borders (Subtle Dark) ─── */
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-default: rgba(255, 255, 255, 0.15);
+  --border-hover: rgba(255, 255, 255, 0.25);
+  --border-focus: var(--brand-500);
 
   /* ─── Status Colors (subtle, professional) ─── */
   --color-danger: #dc2626;

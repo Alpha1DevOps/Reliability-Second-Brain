@@ -1,25 +1,15 @@
 /* ═══ Graph Explorer — Light Theme ═══ */
 
 .graph-container {
-  /* Dark Mode Overrides for Graph Explorer */
-  --bg-white: rgba(30, 41, 59, 0.7);
-  --bg-solid-white: #1e293b;
-  --bg-subtle: rgba(15, 23, 42, 0.6);
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  --border-light: rgba(255, 255, 255, 0.1);
-  --border-default: rgba(255, 255, 255, 0.15);
-
   display: flex; height: calc(100vh - var(--header-height) - 48px);
   position: relative; border-radius: var(--radius-xl);
   overflow: hidden; border: 1px solid var(--border-light);
-  background: #0f172a; /* Solid dark background */
+  background: var(--bg-body);
   color: var(--text-primary);
 }
 
 .graph-sidebar {
-  width: 260px; min-width: 260px; background: rgba(15, 23, 42, 0.5);
+  width: 260px; min-width: 260px; background: var(--bg-white);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border-right: 1px solid var(--border-light);
   display: flex; flex-direction: column;
@@ -122,7 +112,7 @@
 
 /* Detail panel */
 .graph-detail-panel {
-  width: 360px; min-width: 360px; background: rgba(15, 23, 42, 0.85);
+  width: 360px; min-width: 360px; background: var(--bg-white);
   backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
   border-left: 1px solid var(--border-light); overflow-y: auto;
   animation: slideRight 200ms ease-out; display: flex; flex-direction: column;
